@@ -25,9 +25,9 @@ Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다
 * **Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Windows Ubuntu에서 실행하시면 됩니다. 
 
 
-### kaldi_instructional 내려받기
+### kaldi 내려받기
 
-kaldi_instructional에 해당하는 파일들은 github에서 내려받으실 수 있습니다. 다음과 같은 순서로 명령어를 실행하세요. # 이후에 작성된 내용은 다음 줄에 있는 코드에 대한 설명입니다. 
+이번 워크샵에서 사용하는 kaldi에 해당하는 파일들은 github에서 내려받으실 수 있습니다. 다음과 같은 순서로 명령어를 실행하세요. # 이후에 작성된 내용은 다음 줄에 있는 코드에 대한 설명입니다. 
 
 ```bash
 # 작업을 위한 scratch 폴더를 / 아레에 생성
@@ -37,10 +37,10 @@ sudo mkdir /scratch
 cd /scratch
 
 # git에서 kaldi_instructional 내려받기
-sudo git clone https://github.com/seongjinpark-88/kaldi_instructional
+sudo git clone https://github.com/seongjinpark-88/kaldi
 
 # kaldi 폴더로 이동
-cd kaldi_instructional
+cd kaldi
 
 # git에 존재하는 branch 다운로드
 sudo git fetch
@@ -49,27 +49,52 @@ sudo git fetch
 sudo git checkout
 ```
 
-앞으로 진행될 `kaldi` 관련 내용은 모두 `/scratch/kaldi_instructional` 폴더 아래에서 진행됩니다.
+앞으로 진행될 `kaldi` 관련 내용은 모두 `/scratch/kaldi` 폴더 아래에서 진행됩니다.
 
-### kaldi_instructional을 위한 `Docker` 설치
+### kaldi을 위한 `Docker` 설치
 
-* 원 저자는 kaldi_instructional에 있는 코드들을 실행하기 위한 Docker 환경을 DockerHub에 업로드 하였습니다. 다음과 같은 명령어를 통해서 `Docker hub`에서 해당 Docker container를 설치할 수 있습니다. 
+* 다음의 명령어를 사용하여서 kaldi 실행에 필요한 `Docker` 환경을 설치할 수 있습니다. **build_container.sh** 파일은 docker 설치에 필요한 `Dockerfile`의 내용을 불러와서 실제 docker container를 설치하는 과정을 수행하는 스크립트입니다. 
 
 ```bash
+cd /scratch/kaldi/docker
+sudo ./build_container.sh
+
+```
+
+
+* **Note:** 원 저자는 저자의 github에 있는 kaldi_instructional에 있는 코드들을 실행하기 위한 Docker 환경을 DockerHub에 업로드 하였습니다. 다음과 같은 명령어를 통해서 `Docker hub`에서 해당 Docker container를 설치할 수 있습니다. 하지만 이 경우 원 저자의 github의 내용을 모두 가져온 이후 `jupyter notebook` 파일들을 삭제, 워크샵에서 사용하는 github 파일들을 붙여넣은 이후 사용하여야 합니다. 필요하신 분들을 위해 다음의 코드를 남깁니다. 아래 `bash` 명령어를 실행하신 이후, 워크샵에서 사용하는 `kaldi` github에서 **egs/INSTRUCTIONAL** 디렉토리를 /scratch/kaldi_instructional/egs 아래에 붙여넣으시면 됩니다.  
+
+```bash
+sudo mkdir /scratch/
+
+cd /scratch/
+
+sudo git clone https://github.com/michaelcapizzi/kaldi_instructional.git
+
+cd kaldi_instructional
+
+sudo git fetch
+
+sudo git checkout kaldi_instructional
+
 docker pull mcapizzi/kaldi_instructional
+
+cd egs
+
+sudo rm -rf INSTRUCTIONAL
+
 ```
 
 * **Note:** 윈도우 10에서 실행한 우분투에서 Docker를 사용하는 방법은 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하세요. 
 
-* git에서 받은 파일을 통해 `Docker`를 스스로 구축할 수도 있습니다. 현재는 `openfst` 버전의 변화로 인해 오류가 발생하여 확인중에 있습니다. 
 
 ## `Docker` container 실행
 
-`Docker` container를 구성한 상태에서는 프로젝트 폴더 (`/scratch/kaldi_instructional`) 에 있는 `start_container.sh` 파일을 실행시킴으로써 `Docker` container를 실행할 수 있습니다. `start_container.sh` 파일을 실행하게 되면 컴퓨터에서 `8880` 포트를 개방하게 되며, 해당 포트에서 이후 사용될 `Jupyter Notebook`을 실행하게 됩니다. 
+`Docker` container를 구성한 상태에서는 프로젝트 폴더 (`/scratch/kaldi`) 에 있는 `start_container.sh` 파일을 실행시킴으로써 `Docker` container를 실행할 수 있습니다. `start_container.sh` 파일을 실행하게 되면 컴퓨터에서 `8880` 포트를 개방하게 되며, 해당 포트에서 이후 사용될 `Jupyter Notebook`을 실행하게 됩니다. 
 
 ```
-seongjinpark@seongjin:~$ cd /scratch/kaldi_instructional/
-seongjinpark@seongjin:/scratch/kaldi_instructional$ sudo ./start_container.sh 
+seongjinpark@seongjin:~$ cd /scratch/kaldi/
+seongjinpark@seongjin:/scratch/kaldi$ sudo ./start_container.sh 
 [sudo] password for seongjinpark: 
 root@b0b49e44f58b:/scratch/kaldi/egs/INSTRUCTIONAL# 
 ```
@@ -98,6 +123,8 @@ root@b0b49e44f58b:/scratch/kaldi/egs/INSTRUCTIONAL# ./start_jupyter.sh
 ```
 
 다음과 같은 화면이 나온다면, `http://0.0.0.0:8880/?token=5ba706c2b543f5a70b4226ab8990c68d7c508ec3d56a59c0` (0.0.0.0:8880 뒤에 내용은 사용자마다 다를 수 있습니다) 를 사용하시는 브라우저 (크롬이나 파이어폭스 사용을 권장합니다) 주소창에 붙여넣으시면 `Jupyter` 창을 확인하실 수 있습니다. 
+
+**Note:** 현재 `0.0.0.0` 대신 임의의 알파벳+숫자의 조합으로 ip 주소가 출력되는 에러가 있습니다. 그럴 경우 해당 링크를 복사하여 붙여넣으신 이후  `http://`와 `:8880` 사이의 글자들을 **`0.0.0.0`** 으로 변경하셔서 다시 브라우저에서 열어주시면 됩니다. 
 
 ## `tmux`를 이용하여 `jupyter` 실행하기
 
