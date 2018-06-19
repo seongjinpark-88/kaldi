@@ -9,6 +9,8 @@ This repository is from https://github.com/michaelcapizzi/kaldi_instructional, w
 * Finite State Transducer and HCLG
 * Decoding and Evaluation
 
+* **Note:** 필요한 파일을 다운로드하는 과정이 포함되어 있기 때문에, 디스크에 15GB 이상의 여유 공간이 필요합니다. 
+
 ## Resources
 
 Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다. 
