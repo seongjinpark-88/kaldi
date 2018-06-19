@@ -24,11 +24,22 @@ Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다
 * Mac에서 Docker 설치법: https://docs.docker.com/docker-for-mac/install/
 * 전반적인 Docker 설치법: https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html#linux
 
-* **Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Windows Ubuntu에서 실행하시면 됩니다. 
+**Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Windows Ubuntu에서 실행하시면 됩니다. 
 
-* **Note:** Windows 10 Pro 이하의 버전에서는 Hyper-V 지원의 문제로 ubuntu 및 Docker for Windows가 설치되지 않습니다. [Windows 10 Home에서 Docker 설치하기](https://gwonsungjun.github.io/how%20to%20install/2018/01/28/Dockerinstall/)에서 내용을 확인하시고 설치하시면 되겠습니다. 바탕화면에 생성된 `Docker Quickstart Terminal`은 마우스 우클릭 후 관리자 권한으로 실행하여주셔야 합니다. 
+**Note:** Windows 10 Pro 이하의 버전에서는 Hyper-V 지원의 문제로 ubuntu 및 Docker for Windows가 설치되지 않습니다. [Windows 10 Home에서 Docker 설치하기](https://gwonsungjun.github.io/how%20to%20install/2018/01/28/Dockerinstall/)에서 내용을 확인하시고 설치하시면 되겠습니다. 바탕화면에 생성된 `Docker Quickstart Terminal`은 마우스 우클릭 후 관리자 권한으로 실행하여주셔야 합니다. 
 
-* **Note:** `Docker ToolBox`에서는 잘못된 사용을 방지하기 위해서 `Symbolic link(바로가기)`의 생성을 막아두었습니다. 혹 관련된 문제가 발생하는 경우 [이 곳](https://jessezhuang.github.io/article/virtualbox-tips/)에서 `How to Create Virtualenv in Shared Foler` 부분에 나오는 명령어를 실행하신 이후, `Docker Quickstart Terminal`을 관리자 권한으로 실행하여주시면 됩니다. 
+**Note:** `Docker ToolBox`에서는 잘못된 사용을 방지하기 위해서 `Symbolic link(바로가기)`의 생성을 막아두었습니다. 혹 관련된 문제가 발생하는 경우 [이 곳](https://jessezhuang.github.io/article/virtualbox-tips/)에서 `How to Create Virtualenv in Shared Foler` 부분에 나오는 명령어를 실행하신 이후, `Docker Quickstart Terminal`을 관리자 권한으로 실행하여주시면 됩니다. 
+
+**Note:** Windows 10 Pro 이하 버전에서 사용하는 `Docker Toolbox`는 수동으로 CPU 및 메모리 수를 변경하여야 합니다. 기본적으로 CPU는 1개, 메모리는 1GB로 설정되어 있기 때문에 `kaldi` 실행이 어렵습니다. `Docker Quickstart Terminal`을 관리자 권한으로 실행하신 이후, 아래 명령어를 이용하여 값을 변경하실 수 있습니다. CPU나 메모리의 값은 본인의 컴퓨터 사양을 확인하시고 변경하시는 것이 좋으며, 아래는 CPU 4개, 4GB의 Docker를 구성하는 명령어입니다. 
+
+```bash
+docker-machine stop
+cd /c/Program\ Files/Oracle/VirtualBox
+./VBoxManage modifyvm default --cpus 4
+./vBoxManage modifyvm default --memory 4096
+docker-machine start
+```
+
 
 
 ### kaldi 내려받기
