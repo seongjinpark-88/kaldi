@@ -24,6 +24,10 @@ Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다
 
 * **Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Windows Ubuntu에서 실행하시면 됩니다. 
 
+* **Note:** Windows 10 Pro 이하의 버전에서는 Hyper-V 지원의 문제로 ubuntu 및 Docker for Windows가 설치되지 않습니다. [Windows 10 Home에서 Docker 설치하기](https://gwonsungjun.github.io/how%20to%20install/2018/01/28/Dockerinstall/)에서 내용을 확인하시고 설치하시면 되겠습니다. 바탕화면에 생성된 `Docker Quickstart Terminal`은 마우스 우클릭 후 관리자 권한으로 실행하여주셔야 합니다. 
+
+* **Note:** `Docker ToolBox`에서는 잘못된 사용을 방지하기 위해서 `Symbolic link(바로가기)`의 생성을 막아두었습니다. 혹 관련된 문제가 발생하는 경우 [이 곳](https://jessezhuang.github.io/article/virtualbox-tips/)에서 `How to Create Virtualenv in Shared Foler` 부분에 나오는 명령어를 실행하신 이후, `Docker Quickstart Terminal`을 관리자 권한으로 실행하여주시면 됩니다. 
+
 
 ### kaldi 내려받기
 
@@ -50,6 +54,13 @@ sudo git checkout
 ```
 
 앞으로 진행될 `kaldi` 관련 내용은 모두 `/scratch/kaldi` 폴더 아래에서 진행됩니다.
+
+* **Note:** Windows 10 Home 버전의 경우 바탕화면에서 작업을 진행합니다. 바탕화면에 `scratch` 폴더를 생성하신 이후 `Docker Quickstart Terminal`을 관리자 권한으로 실행, 아래 명령어를 통해 `scratch` 폴더로 이동하시면 됩니다. `sudo` 명령어가 사용이 불가하므로, `sudo`를 제외한 나머지 부분을 위와 동일하게 입력하여주시면 됩니다. 
+
+```bash
+cd ~/Desktop/scratch
+
+```
 
 ### kaldi을 위한 `Docker` 설치
 
