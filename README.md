@@ -1,4 +1,4 @@
-# kaldi_instructional
+# Kaldi 기초
 
 This repository is from https://github.com/michaelcapizzi/kaldi_instructional, which contains a simplified version of `Kaldi` toolkit used for instructional purposes.
 
@@ -24,7 +24,15 @@ Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다
 * Mac에서 Docker 설치법: https://docs.docker.com/docker-for-mac/install/
 * 전반적인 Docker 설치법: https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html#linux
 
-**Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Windows Ubuntu에서 실행하시면 됩니다. 
+**Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Ubuntu를 실행하시면 됩니다. 그리고 다음의 명령어를 통해서 컴퓨터의 c 드라이브를 Ubuntu에서도 불러올 수 있도록 설정을 해야 합니다. 설정을 마친 이후에 Ubuntu를 종료 후 다시 시작하시면 됩니다. 이후 모든 작업은 `/c/Users/사용자이름/Desktop/scratch`에서 이루어집니다.
+
+```bash
+sudo echo '[automount]\nroot = /\noptions = "metadata"]' >> /etc/wsl.conf
+
+## Ubuntu 재시작 후
+
+cd /c/Users/사용자이름/Desktop/scratch
+```
 
 **Note:** Windows 10 Pro 이하의 버전에서는 Hyper-V 지원의 문제로 ubuntu 및 Docker for Windows가 설치되지 않습니다. [Windows 10 Home에서 Docker 설치하기](https://gwonsungjun.github.io/how%20to%20install/2018/01/28/Dockerinstall/)에서 내용을 확인하시고 설치하시면 되겠습니다. 바탕화면에 생성된 `Docker Quickstart Terminal`은 마우스 우클릭 후 관리자 권한으로 실행하여주셔야 합니다. 
 
@@ -92,6 +100,13 @@ cd ~/Desktop/scratch/docker
 ./build_container.sh -w
 ```
 
+* **Note:** Windows 10 Pro 이상을 사용하시는 경우, 아래의 명령어를 사용하시면 됩니다.
+
+```bash
+cd /c/Users/사용자이름/Desktop/scratch/docker
+./build_container.sh -w
+```
+
 
 * **Note:** 원 저자는 저자의 github에 있는 kaldi_instructional에 있는 코드들을 실행하기 위한 Docker 환경을 DockerHub에 업로드 하였습니다. 다음과 같은 명령어를 통해서 `Docker hub`에서 해당 Docker container를 설치할 수 있습니다. 하지만 이 경우 원 저자의 github의 내용을 모두 가져온 이후 `jupyter notebook` 파일들을 삭제, 워크샵에서 사용하는 github 파일들을 붙여넣은 이후 사용하여야 합니다. 필요하신 분들을 위해 다음의 코드를 남깁니다. 아래 `bash` 명령어를 실행하신 이후, 워크샵에서 사용하는 `kaldi` github에서 **egs/INSTRUCTIONAL** 디렉토리를 /scratch/kaldi_instructional/egs 아래에 붙여넣으시면 됩니다.  
 
@@ -156,6 +171,8 @@ root@b0b49e44f58b:/scratch/kaldi/egs/INSTRUCTIONAL# ./start_jupyter.sh
 다음과 같은 화면이 나온다면, `http://0.0.0.0:8880/?token=5ba706c2b543f5a70b4226ab8990c68d7c508ec3d56a59c0` (0.0.0.0:8880 뒤에 내용은 사용자마다 다를 수 있습니다) 를 사용하시는 브라우저 (크롬이나 파이어폭스 사용을 권장합니다) 주소창에 붙여넣으시면 `Jupyter` 창을 확인하실 수 있습니다. `jupyter notebook`의 사용 방법은 [이 곳](https://dojang.io/mod/page/view.php?id=1157) 을 참고하세요. 
 
 **Note:** 현재 `0.0.0.0` 대신 임의의 알파벳+숫자의 조합으로 ip 주소가 출력되는 에러가 있습니다. 그럴 경우 해당 링크를 복사하여 붙여넣으신 이후  `http://`와 `:8880` 사이의 글자들을 **`0.0.0.0`** 으로 변경하셔서 다시 브라우저에서 열어주시면 됩니다. 
+
+**Note:** Windows 10 Home 버전 사용자의 경우 **0.0.0.0** 대신에 `Docker Quickstart Terminal` 실행 시 나오는 IP 주소를 입력하시면 됩니다. Windows 10 Pro 이상 사용자의 경우는 **0.0.0.0** 대신 **127.0.0.1**을 사용하시면 됩니다. 
 
 ## `tmux`를 이용하여 `jupyter` 실행하기
 
