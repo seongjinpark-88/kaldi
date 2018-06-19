@@ -27,7 +27,8 @@ Resource 폴더 아래에 코드에서 사용한 자료들이 모여있습니다
 **Note:** Windows Ubuntu의 경우 https://blog.aliencube.org/ko/2018/04/11/running-docker-and-azure-cli-from-wsl/ 를 참고하여 Docker를 설치한 이후, Ubuntu를 실행하시면 됩니다. 그리고 다음의 명령어를 통해서 컴퓨터의 c 드라이브를 Ubuntu에서도 불러올 수 있도록 설정을 해야 합니다. 설정을 마친 이후에 Ubuntu를 종료 후 다시 시작하시면 됩니다. 이후 모든 작업은 `/c/Users/사용자이름/Desktop/scratch`에서 이루어집니다.
 
 ```bash
-sudo echo '[automount]\nroot = /\noptions = "metadata"]' >> /etc/wsl.conf
+sudo echo '[automount]\nroot = /\noptions = "metadata"]' >> wsl.conf
+sudo mv wsl.conf /etc/
 
 ## Ubuntu 재시작 후
 
