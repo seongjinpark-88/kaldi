@@ -74,6 +74,13 @@ sudo ./build_container.sh
 
 ```
 
+* **Note:** Windows 10 Home 버전을 사용하시는 경우, 아래의 명령어를 사용하시면 됩니다. 
+
+```bash
+cd ~/Desktop/scratch/docker
+./build_container.sh -w
+```
+
 
 * **Note:** 원 저자는 저자의 github에 있는 kaldi_instructional에 있는 코드들을 실행하기 위한 Docker 환경을 DockerHub에 업로드 하였습니다. 다음과 같은 명령어를 통해서 `Docker hub`에서 해당 Docker container를 설치할 수 있습니다. 하지만 이 경우 원 저자의 github의 내용을 모두 가져온 이후 `jupyter notebook` 파일들을 삭제, 워크샵에서 사용하는 github 파일들을 붙여넣은 이후 사용하여야 합니다. 필요하신 분들을 위해 다음의 코드를 남깁니다. 아래 `bash` 명령어를 실행하신 이후, 워크샵에서 사용하는 `kaldi` github에서 **egs/INSTRUCTIONAL** 디렉토리를 /scratch/kaldi_instructional/egs 아래에 붙여넣으시면 됩니다.  
 
