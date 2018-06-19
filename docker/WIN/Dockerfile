@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 MAINTAINER Seongjin Park
 
 # ENV and ARG variables
-ARG HOME=/scratch
+ARG HOME=~/Desktop/scratch
 ENV SHELL=/bin/bash
 ENV KALDI_PATH=${HOME}/kaldi
 ENV KALDI_INSTRUCTIONAL_PATH=${KALDI_PATH}/egs/INSTRUCTIONAL
@@ -81,13 +81,13 @@ RUN export PATH=${PATH}:${IRSTLM}/bin
 
 # compile remaining tools
 WORKDIR ${KALDI_PATH}/tools
-RUN make -j 3
+RUN make
 
 # compile kaldi source code
 WORKDIR ${KALDI_PATH}/src
 RUN ./configure --shared
-RUN make depend -j 4
-RUN make -j 4
+RUN make depend
+RUN make
 
 # compile TF RNN src
 #WORKDIR ${KALDI_PATH}/src/tfrnnlm
