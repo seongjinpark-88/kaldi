@@ -8,7 +8,7 @@
 # -m = set amount of memory docker can use during build (in G)
 
 win=false
-mem=4g
+mem=16g
 
 while getopts "wm:" opt; do
     case ${opt} in
@@ -29,10 +29,10 @@ if [[ ${win} == true ]]; then
     docker build \
         -f WIN/Dockerfile \
         -m ${mem} \
-        -t docker-kaldi-instructional ../
+        -t docker-kaldi ../
 else
     docker build \
         -f UNIX/Dockerfile \
         -m ${mem} \
-        -t docker-kaldi-instructional ../
+        -t docker-kaldi ../
 fi
