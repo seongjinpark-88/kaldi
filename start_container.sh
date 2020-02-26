@@ -21,4 +21,4 @@ done
 # cannot link all the way at kaldi root directory
 docker run -it --rm -p $port:$port \
     -v `pwd`/egs:/scratch/kaldi/egs \
-    docker-kaldi-instructional
+    docker-kaldi
