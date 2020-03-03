@@ -16,6 +16,8 @@
 [ -f path.sh ] && . ./path.sh
 set -e
 
+train_cmd=run.pl
+decode_cmd=$train_cmd
 # Acoustic model parameters
 numLeavesTri1=2500
 numGaussTri1=15000
@@ -27,15 +29,15 @@ numGaussUBM=400
 numLeavesSGMM=7000
 numGaussSGMM=9000
 
-feats_nj=10
-train_nj=30
-decode_nj=5
+feats_nj=4
+train_nj=4
+decode_nj=4
 
 echo ============================================================================
 echo "                Data & Lexicon & Language Preparation                     "
 echo ============================================================================
 
-timit=data/timit/TIMIT # @JHU
+timit=/home/seongjinpark/research/kaldi/egs/timit/s5/data/timit/TIMIT # @JHU
 #timit=/mnt/matylda2/data/TIMIT/timit # @BUT
 
 local/timit_data_prep.sh $timit || exit 1
@@ -141,7 +143,7 @@ echo ===========================================================================
 steps/align_fmllr.sh --nj "$train_nj" --cmd "$train_cmd" \
  data/train data/lang exp/tri3 exp/tri3_ali
 
-exit 0 # From this point you can run Karel's DNN : local/nnet/run_dnn.sh
+# exit 0 # From this point you can run Karel's DNN : local/nnet/run_dnn.sh
 
 steps/train_ubm.sh --cmd "$train_cmd" \
  $numGaussUBM data/train data/lang exp/tri3_ali exp/ubm4
@@ -191,7 +193,7 @@ echo "                    DNN Hybrid Training & Decoding                        
 echo ============================================================================
 
 # DNN hybrid system training parameters
-dnn_mem_reqs="--mem 1G"
+dnn_mem_reqs="--mem 16G"
 dnn_extra_opts="--num_epochs 20 --num-epochs-extra 10 --add-layers-period 1 --shrink-interval 3"
 
 steps/nnet2/train_tanh.sh --mix-up 5000 --initial-learning-rate 0.015 \
@@ -228,7 +230,7 @@ echo ===========================================================================
 echo "               DNN Hybrid Training & Decoding (Karel's recipe)            "
 echo ============================================================================
 
-local/nnet/run_dnn.sh
+# local/nnet/run_dnn.sh
 #local/nnet/run_autoencoder.sh : an example, not used to build any system,
 
 echo ============================================================================

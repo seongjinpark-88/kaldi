@@ -20,5 +20,5 @@ done
 
 # cannot link all the way at kaldi root directory
 docker run -it --rm -p $port:$port \
-    -v `pwd`/egs:/scratch/kaldi/egs \
+    -v `pwd`/egs:/home/seongjinpark/research/kaldi/egs \
     docker-kaldi

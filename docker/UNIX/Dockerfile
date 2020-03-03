@@ -12,6 +12,7 @@ ENV KALDI_INSTRUCTIONAL_PATH=${KALDI_PATH}/egs/
 # install dependencies
 RUN apt-get update -qq \
  && apt-get install --no-install-recommends -y \
+    bc \
     graphviz \
     git \
     python \
